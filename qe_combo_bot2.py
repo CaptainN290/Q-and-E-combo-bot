@@ -77,7 +77,9 @@ def find_keys(frame):
 
     bar = frame[y1:y2, x1:x2]
     bh, bw = bar.shape[:2]
-
+ 
+    Image.fromarray(bar).save("debug_bar.png")
+    
     # Key icons have white backgrounds — find bright columns
     gray = bar.mean(axis=2)
     bright = gray > 230
@@ -139,6 +141,7 @@ def classify_key(frame, xs, xe, y1, y2):
 def detect_combo(frame):
     """Returns list of (letter, is_lit) for all keys in the combo bar."""
     keys = find_keys(frame)
+    print("Keys found:", len(keys))
     if not keys:
         return []
 
@@ -189,10 +192,11 @@ def main():
         if not bot_active:
             focused = False
             continue
-
+            print("Scanning...")
         # Focus Roblox once when we turn on
         if not focused:
             focused = focus_roblox()
+            print("Focused:", focused)
 
         try:
             frame = grab()
