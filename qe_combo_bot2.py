@@ -1,7 +1,7 @@
 import time
 import threading
 import numpy as np
-from PIL import ImageGrab
+from PIL import ImageGrab, Image
 import pyautogui
 import pygetwindow as gw
 from pynput import keyboard as kb
